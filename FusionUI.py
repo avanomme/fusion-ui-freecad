@@ -30,64 +30,112 @@ class FusionUI:
         self.apply_style()
         
     def setup_ribbon(self):
-        """Create the ribbon-style interface"""
-        # Create main ribbon toolbar
-        self.ribbon = self.app.addToolBar("Fusion Ribbon")
-        self.ribbon.setMovable(False)
-        
-        # Add tabs (Create, Modify, etc.)
-        self.create_tabs()
-        
-    def create_tabs(self):
-        """Create the main tabs similar to Fusion 360"""
-        tabs = {
-            "Create": ["Sketch", "Extrude", "Revolve", "Sweep"],
-            "Modify": ["Fillet", "Chamfer", "Shell", "Pattern"],
-            "Assemble": ["New Component", "Joint", "Align"],
-            "Inspect": ["Measure", "Section Analysis"]
-        }
-        
-        for tab_name, tools in tabs.items():
-            self.add_tab(tab_name, tools)
-            
-    def add_tab(self, name, tools):
-        """Add a tab with its tools to the ribbon"""
-        tab = QtGui.QToolBar(name)
-        for tool in tools:
-            icon_path = self.get_icon_path(tool)
+        """Create the 3-level Fusion 360-style ribbon interface"""
+        # 1. Top-level workspace tabs (only Solid active for now)
+        self.workspace_tabs = QtGui.QTabBar()
+        self.workspace_tabs.addTab("SOLID")
+        self.workspace_tabs.addTab("SURFACE")
+        self.workspace_tabs.addTab("MESH")
+        self.workspace_tabs.addTab("SHEET METAL")
+        self.workspace_tabs.addTab("PLASTIC")
+        self.workspace_tabs.addTab("UTILITIES")
+        self.workspace_tabs.addTab("MANAGE")
+        self.workspace_tabs.setCurrentIndex(0)
+        self.app.addToolBarBreak()
+        self.app.addToolBar(QtCore.Qt.TopToolBarArea, self._wrap_widget(self.workspace_tabs))
+
+        # 2. Quick access toolbar sections (Create, Modify, etc.)
+        self.section_toolbar = QtGui.QToolBar("Fusion Quick Access")
+        self.section_toolbar.setMovable(False)
+        self.app.addToolBar(self.section_toolbar)
+
+        # Add quick access buttons for each section
+        self.create_section_button = QtGui.QToolButton()
+        self.create_section_button.setText("CREATE")
+        self.create_section_button.setPopupMode(QtGui.QToolButton.InstantPopup)
+        self.create_section_button.setMenu(self.create_create_menu())
+        self.section_toolbar.addWidget(self.create_section_button)
+        # (Add more section buttons here: Modify, Assemble, etc.)
+
+    def _wrap_widget(self, widget):
+        """Wrap a QWidget in a QToolBar for placement in the main window."""
+        toolbar = QtGui.QToolBar()
+        toolbar.addWidget(widget)
+        toolbar.setMovable(False)
+        return toolbar
+
+    def create_create_menu(self):
+        """Create the dropdown menu for the Create section in Solid workspace."""
+        menu = QtGui.QMenu()
+        create_actions = [
+            ("Create Sketch", "Sketcher_NewSketch"),
+            ("Extrude (Pad)", "PartDesign_Pad"),
+            ("Extrude (Part)", "Part_Extrude"),
+            ("Revolve (Part Design)", "PartDesign_Revolution"),
+            ("Revolve (Part)", "Part_Revolve"),
+            ("Sweep (Part)", "Part_Sweep"),
+            ("Sweep (Additive)", "PartDesign_AdditivePipe"),
+            ("Loft (Part)", "Part_Loft"),
+            ("Loft (Additive)", "PartDesign_AdditiveLoft"),
+            ("Box", "Part_Box"),
+            ("Cylinder", "Part_Cylinder"),
+            ("Sphere", "Part_Sphere"),
+            ("Torus", "Part_Torus"),
+            ("Coil (Helix)", "Part_Helix"),
+            ("Pipe (Sweep)", "Part_Sweep"),
+            ("Mirror", "PartDesign_Mirrored"),
+            ("Pattern (Linear)", "PartDesign_LinearPattern"),
+            ("Pattern (Circular)", "PartDesign_PolarPattern"),
+            ("Shell (Thickness)", "PartDesign_Thickness"),
+            ("Fillet", "PartDesign_Fillet"),
+            ("Chamfer", "PartDesign_Chamfer"),
+            ("Combine (Union)", "Part_Union"),
+            ("Combine (Cut)", "Part_Cut"),
+            ("Combine (Intersect)", "Part_Common"),
+            ("Create Body", "PartDesign_Body"),
+            ("Move/Copy", "Std_Placement"),
+            ("Project Geometry", "Sketcher_External")
+        ]
+        for label, cmd in create_actions:
+            icon_path = self.get_icon_path(label)
             if icon_path:
                 icon = QtGui.QIcon(icon_path)
-                action = QtGui.QAction(icon, tool, self.app)
+                action = menu.addAction(icon, label)
             else:
-                action = QtGui.QAction(tool, self.app)
-            tab.addAction(action)
-        self.ribbon.addWidget(tab)
-        
+                action = menu.addAction(label)
+            action.triggered.connect(lambda checked, c=cmd: FreeCADGui.runCommand(c,0))
+        return menu
+
     def get_icon_path(self, tool):
         """Return the icon path for a given tool name, matching Fusion 360 icons where possible."""
         icon_map = {
-            "Create Sketch": "solid_-_api_-_32x32.png",
-            "Extrude": "solid_-_api_-_32x32.png",
-            "Revolve": "solid_-_api_-_32x32.png",
-            "Sweep": "solid_-_api_-_32x32.png",
-            "Loft": "solid_-_api_-_32x32.png",
-            "Rib": "solid_-_api_-_32x32.png",
-            "Web": "solid_-_api_-_32x32.png",
-            "Emboss": "solid_-_api_-_32x32.png",
-            "Hole": "solid_-_api_-_32x32.png",
-            "Thread": "solid_-_api_-_32x32.png",
-            "Box": "solid_-_api_-_32x32.png",
-            "Cylinder": "solid_-_api_-_32x32.png",
-            "Sphere": "solid_-_api_-_32x32.png",
-            "Torus": "solid_-_api_-_32x32.png",
-            "Coil": "solid_-_api_-_32x32.png",
-            "Pipe": "solid_-_api_-_32x32.png",
-            "Pattern": "solid_-_api_-_32x32.png",
-            "Mirror": "solid_-_api_-_32x32.png",
-            "Thicken": "solid_-_api_-_32x32.png",
-            "Boundary Fill": "solid_-_api_-_32x32.png",
-            "Create Base Feature": "solid_-_api_-_32x32.png",
-            "Create PCB": "solid_-_api_-_32x32.png"
+            "Create Sketch": "solid_-_web_-_32x32.png",
+            "Extrude (Pad)": "solid_-_web_-_32x32.png",
+            "Extrude (Part)": "solid_-_web_-_32x32.png",
+            "Revolve (Part Design)": "solid_-_web_-_32x32.png",
+            "Revolve (Part)": "solid_-_web_-_32x32.png",
+            "Sweep (Part)": "solid_-_web_-_32x32.png",
+            "Sweep (Additive)": "solid_-_web_-_32x32.png",
+            "Loft (Part)": "solid_-_web_-_32x32.png",
+            "Loft (Additive)": "solid_-_web_-_32x32.png",
+            "Box": "solid_-_web_-_32x32.png",
+            "Cylinder": "solid_-_web_-_32x32.png",
+            "Sphere": "solid_-_web_-_32x32.png",
+            "Torus": "solid_-_web_-_32x32.png",
+            "Coil (Helix)": "solid_-_web_-_32x32.png",
+            "Pipe (Sweep)": "solid_-_web_-_32x32.png",
+            "Mirror": "solid_-_web_-_32x32.png",
+            "Pattern (Linear)": "solid_-_web_-_32x32.png",
+            "Pattern (Circular)": "solid_-_web_-_32x32.png",
+            "Shell (Thickness)": "solid_-_web_-_32x32.png",
+            "Fillet": "solid_-_web_-_32x32.png",
+            "Chamfer": "solid_-_web_-_32x32.png",
+            "Combine (Union)": "solid_-_web_-_32x32.png",
+            "Combine (Cut)": "solid_-_web_-_32x32.png",
+            "Combine (Intersect)": "solid_-_web_-_32x32.png",
+            "Create Body": "solid_-_web_-_32x32.png",
+            "Move/Copy": "solid_-_web_-_32x32.png",
+            "Project Geometry": "solid_-_web_-_32x32.png"
         }
         filename = icon_map.get(tool)
         if filename:
