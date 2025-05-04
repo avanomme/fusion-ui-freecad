@@ -1,0 +1,53 @@
+FusionWorkbench/
+├── __init__.py                      # Registers the module (FreeCAD needs this)
+├── InitGui.py                       # Entrypoint for FreeCAD's GUI registration
+├── fusion_workbench.py              # Workbench definition class
+├── resources/
+│   ├── icons/                       # All .svg/.png icons
+│   ├── styles.qss                  # Qt stylesheet
+│   └── translations/               # Future-proofing for i18n
+├── core/
+│   ├── __init__.py
+│   ├── toolbar.py                  # Base toolbar class / manager
+│   ├── workspace_state.py          # Stores active mode / current operation
+│   └── mode_switcher.py            # Toggles between Solid, Surface, Mesh...
+├── layout/
+│   ├── __init__.py
+│   ├── main_panel.py               # Main UI frame (vertical layout, canvas, etc.)
+│   ├── toolbar_solid.py            # Toolbar for Solid workspace
+│   └── toolbar_mesh.py             # Toolbar for Mesh workspace
+├── ui/
+│   ├── __init__.py
+│   ├── shortcut_bar.py             # Shared horizontal shortcut bar widget
+│   ├── dropdown_bar.py             # Shared dropdown menu widget
+│   ├── shortcut_button.py          # Shared shortcut button widget
+│   └── dropdown_button.py          # Shared dropdown selector
+├── features/
+│   ├── __init__.py
+│   ├── solid/
+│   │   ├── __init__.py
+│   │   ├── shortcuts.py            # Defines Solid's shortcut tools (Extrude, Revolve)
+│   │   └── dropdown.py             # Defines full dropdown tool list for Solid
+│   ├── mesh/
+│   │   ├── __init__.py
+│   │   ├── shortcuts.py
+│   │   └── dropdown.py
+│   └── surface/                    # Ready for future expansion
+│       ├── __init__.py
+│       ├── shortcuts.py
+│       └── dropdown.py
+├── commands/
+│   ├── __init__.py
+│   ├── cmd_extrude.py
+│   ├── cmd_revolve.py
+│   ├── cmd_shell.py
+│   └── ...                         # Each command callable from the UI
+├── utils/
+│   ├── __init__.py
+│   ├── icon_loader.py              # Loads Qt icons from resources
+│   ├── file_utils.py               # Path handling, save/load helpers
+│   └── qdialog_utils.py            # Qt dialog wrapper utils
+└── tests/
+    ├── __init__.py
+    ├── test_shortcut_buttons.py
+    └── test_toolbar_assembly.py
