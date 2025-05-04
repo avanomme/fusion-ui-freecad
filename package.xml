@@ -1,14 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
-
-  <name>fusion</name>
-
-  <description>This plugin transforms FreeCAD's interface to match Fusion 360's look and feel, including: - Fusion 360-style interface layout - Matching keyboard shortcuts - Similar toolbar organization - Fusion 360-inspired icons</description>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+  <name>fusion-ui-freecad</name>
   <version>2025.5.4</version>
+  <description>A workbench that mimics Fusion 360's UI within FreeCAD</description>
 
-  <date>2025-05-04</date>
+  <maintainers>
+    <maintainer>
+      <name>Adam Van Omme</name>
+      <email>avanomme@upei.ca</email>
+    </maintainer>
+  </maintainers>
 
-  <maintainer email="avanomme@upei.ca">AVO</maintainer>
+  <url type="repo">https://github.com/avanomme/fusion-ui-freecad</url>
+  <url type="readme">https://github.com/avanomme/fusion-ui-freecad/blob/main/README.md</url>
 
+  <license>MIT</license>
+  <icon>icons/FusionWorkbench.svg</icon>
+
+  <workbench>
+    <classname>FusionWorkbench</classname>
+    <module>fusion_workbench</module>
+  </workbench>
 </package>

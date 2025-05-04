@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" ry="12" fill="#2C2C2C"/>
+  <text x="50%" y="50%" font-size="24" fill="#ffffff" font-family="Arial, sans-serif" text-anchor="middle" alignment-baseline="central">
+    F360
+  </text>
+</svg>
