@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+
+  <name>fusion</name>
+
+  <description>This plugin transforms FreeCAD's interface to match Fusion 360's look and feel, including: - Fusion 360-style interface layout - Matching keyboard shortcuts - Similar toolbar organization - Fusion 360-inspired icons</description>
+
+  <version>2025.5.4</version>
+
+  <date>2025-05-04</date>
+
+  <maintainer email="avanomme@upei.ca">AVO</maintainer>
+
+</package>
