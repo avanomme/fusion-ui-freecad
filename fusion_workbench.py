@@ -1,31 +1,13 @@
 import FreeCADGui
-from PySide2 import QtWidgets, QtCore
-from layout.main_panel import MainPanel
 
 class FusionWorkbench(FreeCADGui.Workbench):
-    MenuText = "Fusion"
-    ToolTip = "Fusion-style UI workbench with tabbed toolbar"
-    
-    def __init__(self):
-        self.panel = None
+    MenuText = "Fusion UI"
+    ToolTip = "Mimics Fusion 360's toolbar layout"
+    Icon = "icons/FusionWorkbench.svg"
 
     def Initialize(self):
-        self.panel = MainPanel()
-        self.dock = QtWidgets.QDockWidget("Fusion UI", FreeCADGui.getMainWindow())
-        self.dock.setObjectName("FusionDock")
-        self.dock.setWidget(self.panel)
-        FreeCADGui.getMainWindow().addDockWidget(QtCore.Qt.TopDockWidgetArea, self.dock)
-
-    def Activated(self):
-        if self.dock:
-            self.dock.show()
-
-    def Deactivated(self):
-        if self.dock:
-            self.dock.hide()
-
-    def ContextMenu(self, recipient):
-        pass
+        self.appendToolbar("Fusion Tools", [])  # Empty for now
+        print("✅ Fusion Workbench initialized")
 
     def GetClassName(self):
         return "Gui::PythonWorkbench"
