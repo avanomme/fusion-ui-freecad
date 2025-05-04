@@ -1,3 +1,4 @@
+# InitGui.py
 import FreeCADGui
 from fusion_workbench import FusionWorkbench
 

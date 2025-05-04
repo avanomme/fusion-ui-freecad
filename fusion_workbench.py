@@ -5,7 +5,7 @@ from layout.main_panel import MainPanel
 class FusionWorkbench(FreeCADGui.Workbench):
     MenuText = "Fusion"
     ToolTip = "Fusion-style UI workbench with tabbed toolbar"
-    Icon = ":/icons/FusionWorkbench.svg"  # Optional: put your icon here
+    Icon = "icons/FusionWorkbench.svg"  # Optional: put your icon here
 
     def __init__(self):
         self.panel = None
