@@ -25,6 +25,7 @@ This plugin transforms FreeCAD's interface to match Fusion 360's look and feel, 
 - Dark/Light theme support
 - Icon replacement system
 
+- Experimental AI-assisted design (text to geometry)
 ## Development
 
 This plugin is built using:
@@ -43,3 +44,19 @@ Contributions are welcome! Please follow the standard GitHub workflow:
 ## License
 
 MIT License 
+## AI Assisted Design
+
+Use the **AI Design** button to drive basic modeling commands from text.
+Examples:
+
+- ``cube 10`` – create a 10 mm cube
+- ``box 5 8 2`` – create a box
+- ``cylinder 4 12`` – create a cylinder
+- ``open /path/to/file.FCStd`` – load a document
+- ``save /path/to/out.FCStd`` – save the current document
+- ``translate Cube 1 0 0`` – move an object by name
+- ``scale Cube 2`` – scale an object
+
+These commands demonstrate how text input can open, modify and generate
+geometry directly in FreeCAD.
+
