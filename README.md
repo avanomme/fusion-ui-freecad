@@ -25,6 +25,7 @@ This plugin transforms FreeCAD's interface to match Fusion 360's look and feel, 
 - Dark/Light theme support
 - Icon replacement system
 
+- Experimental AI-assisted design (text to geometry)
 ## Development
 
 This plugin is built using:
@@ -43,3 +44,7 @@ Contributions are welcome! Please follow the standard GitHub workflow:
 ## License
 
 MIT License 
+## AI Assisted Design
+
+Use the **AI Design** button to create simple primitives from text instructions (e.g. "cube 10" or "cylinder 5 20").
+
