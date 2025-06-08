@@ -101,3 +101,5 @@ def generate_from_text(text):
         return obj
 
 
+    raise ValueError("Unsupported instruction: {}".format(text))
+
