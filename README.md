@@ -46,5 +46,19 @@ Contributions are welcome! Please follow the standard GitHub workflow:
 MIT License 
 ## AI Assisted Design
 
-Use the **AI Design** button to create simple primitives from text instructions (e.g. "cube 10" or "cylinder 5 20").
+
+Use the **AI Design** button to drive basic modeling commands from text.
+Examples:
+
+- ``cube 10`` – create a 10 mm cube
+- ``box 5 8 2`` – create a box
+- ``cylinder 4 12`` – create a cylinder
+- ``open /path/to/file.FCStd`` – load a document
+- ``save /path/to/out.FCStd`` – save the current document
+- ``translate Cube 1 0 0`` – move an object by name
+- ``scale Cube 2`` – scale an object
+
+These commands demonstrate how text input can open, modify and generate
+geometry directly in FreeCAD.
+
 
