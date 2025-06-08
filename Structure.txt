@@ -47,6 +47,9 @@ FusionWorkbench/
 │   ├── icon_loader.py              # Loads Qt icons from resources
 │   ├── file_utils.py               # Path handling, save/load helpers
 │   └── qdialog_utils.py            # Qt dialog wrapper utils
+├── ai/
+│   ├── __init__.py
+│   └── text_design.py               # Parses text and creates primitives
 └── tests/
     ├── __init__.py
     ├── test_shortcut_buttons.py
