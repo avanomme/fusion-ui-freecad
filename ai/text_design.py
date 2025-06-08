@@ -5,6 +5,7 @@ import re
 
 
 def generate_from_text(text):
+
     """Generate or edit geometry from text instructions.
 
     Supported commands:
@@ -15,6 +16,7 @@ def generate_from_text(text):
     - ``save <path>`` -> save the active document
     - ``translate <name> <x> <y> <z>`` -> move an object
     - ``scale <name> <factor>`` -> uniformly scale an object
+
     """
     text = text.lower().strip()
     doc = FreeCAD.ActiveDocument
@@ -98,4 +100,6 @@ def generate_from_text(text):
         doc.recompute()
         return obj
 
+
     raise ValueError("Unsupported instruction: {}".format(text))
+
