@@ -46,6 +46,7 @@ Contributions are welcome! Please follow the standard GitHub workflow:
 MIT License 
 ## AI Assisted Design
 
+
 Use the **AI Design** button to drive basic modeling commands from text.
 Examples:
 
@@ -59,4 +60,5 @@ Examples:
 
 These commands demonstrate how text input can open, modify and generate
 geometry directly in FreeCAD.
+
 
